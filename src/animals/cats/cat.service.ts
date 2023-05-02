@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CatService {
-  count_eyes(): number {
-    return 2;
+  count_cats(){
+    return 32
   }
 
-  count_legs(): number {
-    return 4
+  get_cat_price(){
+    return 3
   }
 }

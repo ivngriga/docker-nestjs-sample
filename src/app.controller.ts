@@ -1,12 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
+import { SubmitOfferDto } from './dto/submit_offer.dto';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Post()
+  async submit_offer(@Body() submitOfferDto: SubmitOfferDto ) { 
+    return await this.appService.submit_offer(submitOfferDto) 
   }
 }
