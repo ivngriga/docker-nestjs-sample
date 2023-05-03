@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, HttpStatus, HttpException } from '@nestjs/common';
 import { DogService } from './dog/dog.service';
 import { CatService } from './cats/cat.service';
 
@@ -9,18 +9,32 @@ export class AnimalShelterService {
     private readonly catService: CatService
   ) {}
 
-  animal_count(): number {
+  animal_count(animal_type: string): number {
+    switch(animal_type){
+      case "cat":
+        return this.catService.count_cats()
+
+      case "dog":
+        return this.dogService.count_dogs()
+    }
+
+    throw new HttpException("Invalid animal type. Animal type must be 'cat' or 'dog'", HttpStatus.BAD_REQUEST)
+  }
+
+  total_animal_count(): number {
     return this.dogService.count_dogs() + this.catService.count_cats()
   }
 
-  animal_price(type: string, number: number): number {
+  animal_price(type: string): number {
     switch(type){
       case "cat":
-        return number * this.catService.get_cat_price()
+        return this.catService.get_cat_price()
 
       case "dog":
-        return number * this.dogService.get_dog_price()
+        return this.dogService.get_dog_price()
     }
+
+    throw new HttpException("Invalid animal type. Animal type must be 'cat' or 'dog'", HttpStatus.BAD_REQUEST)
   }
 
   net_worth(): number {
