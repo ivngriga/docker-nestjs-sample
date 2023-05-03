@@ -14,7 +14,7 @@ git clone https://github.com/ivngriga/docker-nestjs-sample.git</p>
 
 <br>At this point, if you are using the docker client you should see the container running in the app, and should be able to make requests to the API.
 
-Note: the Dockerfile includes npm install, so installing packages locally is not a requirement. If you wish to install the packages locally for quicker testing you can run npm install and remove the npm install command from the Dockerfile, but from my experience this is longer since all the context has to be transferred to the image, which can take a while especially for a large project over a network.
+Note: the Dockerfile includes npm install, so installing packages locally is not a requirement. If you wish to install the packages locally for quicker testing you can run npm install and remove the npm install command from the Dockerfile.
 
 Possible requests:<br>
 <br>Get /count-animals <br>
