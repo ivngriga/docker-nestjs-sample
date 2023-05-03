@@ -1,4 +1,4 @@
-import { Injectable, HttpCode } from '@nestjs/common';
+import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 import { AnimalShelterService } from './animals/animalshelter.service';
 import { SubmitOfferDto } from './dto/submit_offer.dto';
 
@@ -29,7 +29,7 @@ export class AppService {
     const newDto = new CountAnimalsDto(countAnimalsDto.username, countAnimalsDto.animal_type)
 
     const errors = await validate(newDto)
-    if (errors.length > 0) console.log('validation failed. errors: ', errors);
+    if (errors.length > 0) throw new HttpException("Validation failed. Make sure all required params", HttpStatus.BAD_REQUEST)
     else console.log('validation succeed')
 
     let animal_count: number
@@ -39,7 +39,5 @@ export class AppService {
     animal_price  = this.animalShelterService.animal_price(countAnimalsDto.animal_type)
 
     return `We have ${animal_count} ${countAnimalsDto.animal_type}(s). Each costs ${animal_price} dollar(s).`
-    
-
   }
 }
