@@ -29,7 +29,7 @@ export class AppService {
     const newDto = new CountAnimalsDto(countAnimalsDto.username, countAnimalsDto.animal_type)
 
     const errors = await validate(newDto)
-    if (errors.length > 0) throw new HttpException("Validation failed. Make sure all required params", HttpStatus.BAD_REQUEST)
+    if (errors.length > 0) throw new HttpException("Validation failed. Make sure all required params are present and of valid type.", HttpStatus.BAD_REQUEST)
     else console.log('validation succeed')
 
     let animal_count: number
